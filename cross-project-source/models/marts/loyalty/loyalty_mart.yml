@@ -1,0 +1,52 @@
+version: 2
+
+# First, define the group and owner
+groups:
+  - name: loyalty
+    owner:
+      name: Loyalty Team
+      email: loyalty@jaffle.shop
+
+# Then, add 'group' + 'access' modifier to specific models
+models:
+  # This is a public model -- it's a stable & mature interface for other teams/projects
+  - name: dim_customers
+    group: loyalty
+    access: public
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: customer_key
+        data_type: int
+        constraints:
+          - type: not_null
+      - name: name
+        data_type: string
+      - name: address
+        data_type: string
+      - name: nation
+        data_type: string
+      - name: region
+        data_type: string
+      - name: phone_number
+        data_type: string
+      - name: account_balance
+        data_type: int
+      - name: market_segment
+        data_type: string
+    
+  # This is a protected model -- it might be useful elsewhere in *this* project,
+  # but it shouldn't be exposed elsewhere
+  - name: stg_crm_customers
+    group: loyalty
+    access: protected
+
+  # This is a private model -- it's an intermediate transformation intended for use in this context *only*
+  - name: stg_crm_nations
+    group: loyalty
+    access: private
+
+  - name: stg_crm_regions
+    group: loyalty
+    access: private

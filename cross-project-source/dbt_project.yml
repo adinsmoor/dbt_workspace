@@ -10,3 +10,12 @@ models:
       columns: True
     staging:
       +schema: staging
+    marts:
+      cargo:
+        +database: datamart
+        +schema: cargo
+      loyalty:
+        +database: datamart
+        +schema: loyalty
+    products:
+      +database: products
